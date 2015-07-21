@@ -1,10 +1,12 @@
 import os
 import sys
 import json
+import gzip
 import urllib
 import binascii
 import argparse
 import requests
+import StringIO
 
 GOOGLE_LOGIN_URL = 'https://android.clients.google.com/auth'
 GOOGLE_PURCHASE_URL = 'https://android.clients.google.com/fdfe/purchase'
@@ -87,8 +89,12 @@ class APKfetch(object):
         response = self.session.get(urls[1], headers={'User-Agent': 'AndroidDownloadManager/4.4.4 (Linux; U; Android 4.4.4; XT1032 Build/KXB21.14-L1.40)'},
                                     cookies={'MarketDA': marketda}, allow_redirects=True, verify=False)
         
+        buffer = StringIO.StringIO(response.content)
+        gzip_file = gzip.GzipFile(mode="rb", fileobj=buffer)
+        uncompressed = gzip_file.read()
+        
         with open('test.apk', 'wb') as fp:
-            fp.write(response.content)
+            fp.write(uncompressed)
 
         return os.path.exists('test.apk')
 
