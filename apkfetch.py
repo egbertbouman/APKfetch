@@ -120,6 +120,7 @@ def main(argv):
     parser.add_argument('--user', '-u', help='Google username')
     parser.add_argument('--passwd', '-p', help='Google password')
     parser.add_argument('--androidid', '-a', help='AndroidID')
+    parser.add_argument('--package', '-k', help='Package name of the app')
 
     try:
         args = parser.parse_args(sys.argv[1:])
@@ -127,18 +128,17 @@ def main(argv):
         user = args.user
         passwd = args.passwd
         androidid = args.androidid
+        package = args.package
 
-        if not user or not passwd or not androidid:
+        if not user or not passwd or not androidid or not package:
             parser.print_usage()
-            raise ValueError('user, passwd and androidid are required options')
+            raise ValueError('user, passwd, androidid, and package are required options')
 
         apk = APKfetch()
         apk.login(user, passwd, androidid)
-        apk.fetch('com.androits.gps.test.free')
+        apk.fetch(package)
 
     except Exception, e:
-        from traceback import print_exc
-        print_exc()
         print 'Error:', str(e)
         sys.exit(1)
 
