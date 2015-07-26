@@ -1,0 +1,34 @@
+message AndroidCheckinRequest {
+  optional int64 id = 2;
+  optional AndroidCheckinProto checkin = 4;
+  optional string marketCheckin = 8;
+  repeated string accountCookie = 11;
+  optional int32 version = 14;
+  optional DeviceConfigurationProto deviceConfiguration = 18;
+  optional int32 fragment = 20;
+}
+message AndroidCheckinProto {
+  optional AndroidBuildProto build = 1;
+}
+message AndroidBuildProto {
+  optional int64 timestamp = 7;
+  optional int32 sdkVersion = 10;
+}
+message DeviceConfigurationProto {
+  optional int32 touchScreen = 1;
+  optional int32 keyboard = 2;
+  optional int32 navigation = 3;
+  optional int32 screenLayout = 4;
+  optional bool hasHardKeyboard = 5;
+  optional bool hasFiveWayNavigation = 6;
+  optional int32 screenDensity = 7;
+  optional int32 glEsVersion = 8;
+  repeated string systemSharedLibrary = 9;
+  repeated string systemAvailableFeature = 10;
+  optional int32 screenWidth = 12;
+  optional int32 screenHeight = 13;
+}
+message AndroidCheckinResponse {
+  optional fixed64 androidId = 7;
+  optional fixed64 securityToken = 8;
+}
