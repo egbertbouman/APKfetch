@@ -3,7 +3,6 @@ import sys
 import json
 import gzip
 import time
-import urllib
 import argparse
 import requests
 import StringIO
@@ -52,24 +51,24 @@ class APKfetch(object):
         if self.androidid:
             self.session.headers.update({'device': self.androidid})
 
-        request = {'accountType': 'HOSTED_OR_GOOGLE',
-                   'has_permission': '1',
-                   'add_account': '1',
-                   'get_accountid': '1',
-                   'service': service,
-                   'app': app,
-                   'source': 'android',
-                   'Email': self.user}
+        data = {'accountType': 'HOSTED_OR_GOOGLE',
+                'has_permission': '1',
+                'add_account': '1',
+                'get_accountid': '1',
+                'service': service,
+                'app': app,
+                'source': 'android',
+                'Email': self.user}
         
         if self.androidid:
-            request['androidId'] = self.androidid
+            data['androidId'] = self.androidid
             
         if self.token:
-            request['EncryptedPasswd'] = self.token
+            data['EncryptedPasswd'] = self.token
         else:
-            request['Passwd'] = self.passwd
+            data['Passwd'] = self.passwd
 
-        response = self.session.post(GOOGLE_LOGIN_URL, data=urllib.urlencode(request), allow_redirects=True)
+        response = self.session.post(GOOGLE_LOGIN_URL, data=data, allow_redirects=True)
         
         token = None
         auth = None
@@ -165,11 +164,11 @@ class APKfetch(object):
                    'Host': 'android.clients.google.com',
                    'Authorization': 'GoogleLogin ' + self.auth}
 
-        encoded_json = urllib.urlencode({'doc': package_name,
-                                         'ot': '1',
-                                         'vc': self.version(package_name),
-                                         'tok': 'dummy-token'})
-        response = self.session.post(GOOGLE_PURCHASE_URL, data=encoded_json, headers=headers, allow_redirects=True)
+        data = {'doc': package_name,
+                'ot': '1',
+                'vc': self.version(package_name),
+                'tok': 'dummy-token'}
+        response = self.session.post(GOOGLE_PURCHASE_URL, data=data, headers=headers, allow_redirects=True)
 
         # Extract URLs from response
         # TODO: use protobuf
