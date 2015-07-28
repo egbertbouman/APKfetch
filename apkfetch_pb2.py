@@ -18,7 +18,7 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='apkfetch.proto',
   package='',
-  serialized_pb=_b('\n\x0e\x61pkfetch.proto\"\xd3\x01\n\x15\x41ndroidCheckinRequest\x12\n\n\x02id\x18\x02 \x01(\x03\x12%\n\x07\x63heckin\x18\x04 \x01(\x0b\x32\x14.AndroidCheckinProto\x12\x15\n\rmarketCheckin\x18\x08 \x01(\t\x12\x15\n\raccountCookie\x18\x0b \x03(\t\x12\x0f\n\x07version\x18\x0e \x01(\x05\x12\x36\n\x13\x64\x65viceConfiguration\x18\x12 \x01(\x0b\x32\x19.DeviceConfigurationProto\x12\x10\n\x08\x66ragment\x18\x14 \x01(\x05\"8\n\x13\x41ndroidCheckinProto\x12!\n\x05\x62uild\x18\x01 \x01(\x0b\x32\x12.AndroidBuildProto\":\n\x11\x41ndroidBuildProto\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\x12\x12\n\nsdkVersion\x18\n \x01(\x05\"\xb6\x02\n\x18\x44\x65viceConfigurationProto\x12\x13\n\x0btouchScreen\x18\x01 \x01(\x05\x12\x10\n\x08keyboard\x18\x02 \x01(\x05\x12\x12\n\nnavigation\x18\x03 \x01(\x05\x12\x14\n\x0cscreenLayout\x18\x04 \x01(\x05\x12\x17\n\x0fhasHardKeyboard\x18\x05 \x01(\x08\x12\x1c\n\x14hasFiveWayNavigation\x18\x06 \x01(\x08\x12\x15\n\rscreenDensity\x18\x07 \x01(\x05\x12\x13\n\x0bglEsVersion\x18\x08 \x01(\x05\x12\x1b\n\x13systemSharedLibrary\x18\t \x03(\t\x12\x1e\n\x16systemAvailableFeature\x18\n \x03(\t\x12\x13\n\x0bscreenWidth\x18\x0c \x01(\x05\x12\x14\n\x0cscreenHeight\x18\r \x01(\x05\"B\n\x16\x41ndroidCheckinResponse\x12\x11\n\tandroidId\x18\x07 \x01(\x06\x12\x15\n\rsecurityToken\x18\x08 \x01(\x06')
+  serialized_pb=_b('\n\x0e\x61pkfetch.proto\"\xd3\x01\n\x15\x41ndroidCheckinRequest\x12\n\n\x02id\x18\x02 \x01(\x03\x12%\n\x07\x63heckin\x18\x04 \x01(\x0b\x32\x14.AndroidCheckinProto\x12\x15\n\rmarketCheckin\x18\x08 \x01(\t\x12\x15\n\raccountCookie\x18\x0b \x03(\t\x12\x0f\n\x07version\x18\x0e \x01(\x05\x12\x36\n\x13\x64\x65viceConfiguration\x18\x12 \x01(\x0b\x32\x19.DeviceConfigurationProto\x12\x10\n\x08\x66ragment\x18\x14 \x01(\x05\"8\n\x13\x41ndroidCheckinProto\x12!\n\x05\x62uild\x18\x01 \x01(\x0b\x32\x12.AndroidBuildProto\":\n\x11\x41ndroidBuildProto\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\x12\x12\n\nsdkVersion\x18\n \x01(\x05\"\xb6\x02\n\x18\x44\x65viceConfigurationProto\x12\x13\n\x0btouchScreen\x18\x01 \x01(\x05\x12\x10\n\x08keyboard\x18\x02 \x01(\x05\x12\x12\n\nnavigation\x18\x03 \x01(\x05\x12\x14\n\x0cscreenLayout\x18\x04 \x01(\x05\x12\x17\n\x0fhasHardKeyboard\x18\x05 \x01(\x08\x12\x1c\n\x14hasFiveWayNavigation\x18\x06 \x01(\x08\x12\x15\n\rscreenDensity\x18\x07 \x01(\x05\x12\x13\n\x0bglEsVersion\x18\x08 \x01(\x05\x12\x1b\n\x13systemSharedLibrary\x18\t \x03(\t\x12\x1e\n\x16systemAvailableFeature\x18\n \x03(\t\x12\x13\n\x0bscreenWidth\x18\x0c \x01(\x05\x12\x14\n\x0cscreenHeight\x18\r \x01(\x05\"B\n\x16\x41ndroidCheckinResponse\x12\x11\n\tandroidId\x18\x07 \x01(\x06\x12\x15\n\rsecurityToken\x18\x08 \x01(\x06\",\n\x0fResponseWrapper\x12\x19\n\x07payload\x18\x01 \x01(\x0b\x32\x08.Payload\",\n\x07Payload\x12!\n\x0b\x62uyResponse\x18\x04 \x01(\x0b\x32\x0c.BuyResponse\"F\n\x0b\x42uyResponse\x12\x37\n\x16purchaseStatusResponse\x18\' \x01(\x0b\x32\x17.PurchaseStatusResponse\"J\n\x16PurchaseStatusResponse\x12\x30\n\x0f\x61ppDeliveryData\x18\x08 \x01(\x0b\x32\x17.AndroidAppDeliveryData\"V\n\x16\x41ndroidAppDeliveryData\x12\x13\n\x0b\x64ownloadUrl\x18\x03 \x01(\t\x12\'\n\x12\x64ownloadAuthCookie\x18\x05 \x03(\x0b\x32\x0b.HttpCookie\")\n\nHttpCookie\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -307,14 +307,219 @@ _ANDROIDCHECKINRESPONSE = _descriptor.Descriptor(
   serialized_end=729,
 )
 
+
+_RESPONSEWRAPPER = _descriptor.Descriptor(
+  name='ResponseWrapper',
+  full_name='ResponseWrapper',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='payload', full_name='ResponseWrapper.payload', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=731,
+  serialized_end=775,
+)
+
+
+_PAYLOAD = _descriptor.Descriptor(
+  name='Payload',
+  full_name='Payload',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='buyResponse', full_name='Payload.buyResponse', index=0,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=777,
+  serialized_end=821,
+)
+
+
+_BUYRESPONSE = _descriptor.Descriptor(
+  name='BuyResponse',
+  full_name='BuyResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='purchaseStatusResponse', full_name='BuyResponse.purchaseStatusResponse', index=0,
+      number=39, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=823,
+  serialized_end=893,
+)
+
+
+_PURCHASESTATUSRESPONSE = _descriptor.Descriptor(
+  name='PurchaseStatusResponse',
+  full_name='PurchaseStatusResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='appDeliveryData', full_name='PurchaseStatusResponse.appDeliveryData', index=0,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=895,
+  serialized_end=969,
+)
+
+
+_ANDROIDAPPDELIVERYDATA = _descriptor.Descriptor(
+  name='AndroidAppDeliveryData',
+  full_name='AndroidAppDeliveryData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='downloadUrl', full_name='AndroidAppDeliveryData.downloadUrl', index=0,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='downloadAuthCookie', full_name='AndroidAppDeliveryData.downloadAuthCookie', index=1,
+      number=5, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=971,
+  serialized_end=1057,
+)
+
+
+_HTTPCOOKIE = _descriptor.Descriptor(
+  name='HttpCookie',
+  full_name='HttpCookie',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='HttpCookie.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='HttpCookie.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1059,
+  serialized_end=1100,
+)
+
 _ANDROIDCHECKINREQUEST.fields_by_name['checkin'].message_type = _ANDROIDCHECKINPROTO
 _ANDROIDCHECKINREQUEST.fields_by_name['deviceConfiguration'].message_type = _DEVICECONFIGURATIONPROTO
 _ANDROIDCHECKINPROTO.fields_by_name['build'].message_type = _ANDROIDBUILDPROTO
+_RESPONSEWRAPPER.fields_by_name['payload'].message_type = _PAYLOAD
+_PAYLOAD.fields_by_name['buyResponse'].message_type = _BUYRESPONSE
+_BUYRESPONSE.fields_by_name['purchaseStatusResponse'].message_type = _PURCHASESTATUSRESPONSE
+_PURCHASESTATUSRESPONSE.fields_by_name['appDeliveryData'].message_type = _ANDROIDAPPDELIVERYDATA
+_ANDROIDAPPDELIVERYDATA.fields_by_name['downloadAuthCookie'].message_type = _HTTPCOOKIE
 DESCRIPTOR.message_types_by_name['AndroidCheckinRequest'] = _ANDROIDCHECKINREQUEST
 DESCRIPTOR.message_types_by_name['AndroidCheckinProto'] = _ANDROIDCHECKINPROTO
 DESCRIPTOR.message_types_by_name['AndroidBuildProto'] = _ANDROIDBUILDPROTO
 DESCRIPTOR.message_types_by_name['DeviceConfigurationProto'] = _DEVICECONFIGURATIONPROTO
 DESCRIPTOR.message_types_by_name['AndroidCheckinResponse'] = _ANDROIDCHECKINRESPONSE
+DESCRIPTOR.message_types_by_name['ResponseWrapper'] = _RESPONSEWRAPPER
+DESCRIPTOR.message_types_by_name['Payload'] = _PAYLOAD
+DESCRIPTOR.message_types_by_name['BuyResponse'] = _BUYRESPONSE
+DESCRIPTOR.message_types_by_name['PurchaseStatusResponse'] = _PURCHASESTATUSRESPONSE
+DESCRIPTOR.message_types_by_name['AndroidAppDeliveryData'] = _ANDROIDAPPDELIVERYDATA
+DESCRIPTOR.message_types_by_name['HttpCookie'] = _HTTPCOOKIE
 
 AndroidCheckinRequest = _reflection.GeneratedProtocolMessageType('AndroidCheckinRequest', (_message.Message,), dict(
   DESCRIPTOR = _ANDROIDCHECKINREQUEST,
@@ -350,6 +555,48 @@ AndroidCheckinResponse = _reflection.GeneratedProtocolMessageType('AndroidChecki
   # @@protoc_insertion_point(class_scope:AndroidCheckinResponse)
   ))
 _sym_db.RegisterMessage(AndroidCheckinResponse)
+
+ResponseWrapper = _reflection.GeneratedProtocolMessageType('ResponseWrapper', (_message.Message,), dict(
+  DESCRIPTOR = _RESPONSEWRAPPER,
+  __module__ = 'apkfetch_pb2'
+  # @@protoc_insertion_point(class_scope:ResponseWrapper)
+  ))
+_sym_db.RegisterMessage(ResponseWrapper)
+
+Payload = _reflection.GeneratedProtocolMessageType('Payload', (_message.Message,), dict(
+  DESCRIPTOR = _PAYLOAD,
+  __module__ = 'apkfetch_pb2'
+  # @@protoc_insertion_point(class_scope:Payload)
+  ))
+_sym_db.RegisterMessage(Payload)
+
+BuyResponse = _reflection.GeneratedProtocolMessageType('BuyResponse', (_message.Message,), dict(
+  DESCRIPTOR = _BUYRESPONSE,
+  __module__ = 'apkfetch_pb2'
+  # @@protoc_insertion_point(class_scope:BuyResponse)
+  ))
+_sym_db.RegisterMessage(BuyResponse)
+
+PurchaseStatusResponse = _reflection.GeneratedProtocolMessageType('PurchaseStatusResponse', (_message.Message,), dict(
+  DESCRIPTOR = _PURCHASESTATUSRESPONSE,
+  __module__ = 'apkfetch_pb2'
+  # @@protoc_insertion_point(class_scope:PurchaseStatusResponse)
+  ))
+_sym_db.RegisterMessage(PurchaseStatusResponse)
+
+AndroidAppDeliveryData = _reflection.GeneratedProtocolMessageType('AndroidAppDeliveryData', (_message.Message,), dict(
+  DESCRIPTOR = _ANDROIDAPPDELIVERYDATA,
+  __module__ = 'apkfetch_pb2'
+  # @@protoc_insertion_point(class_scope:AndroidAppDeliveryData)
+  ))
+_sym_db.RegisterMessage(AndroidAppDeliveryData)
+
+HttpCookie = _reflection.GeneratedProtocolMessageType('HttpCookie', (_message.Message,), dict(
+  DESCRIPTOR = _HTTPCOOKIE,
+  __module__ = 'apkfetch_pb2'
+  # @@protoc_insertion_point(class_scope:HttpCookie)
+  ))
+_sym_db.RegisterMessage(HttpCookie)
 
 
 # @@protoc_insertion_point(module_scope)

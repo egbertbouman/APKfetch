@@ -1,3 +1,5 @@
+// Note: messages only include fields needed for APKfetch to work
+
 message AndroidCheckinRequest {
   optional int64 id = 2;
   optional AndroidCheckinProto checkin = 4;
@@ -31,4 +33,24 @@ message DeviceConfigurationProto {
 message AndroidCheckinResponse {
   optional fixed64 androidId = 7;
   optional fixed64 securityToken = 8;
+}
+message ResponseWrapper {
+  optional Payload payload = 1;
+}
+message Payload {
+  optional BuyResponse buyResponse = 4;
+}
+message BuyResponse {
+  optional PurchaseStatusResponse purchaseStatusResponse = 39;
+}
+message PurchaseStatusResponse {
+  optional AndroidAppDeliveryData appDeliveryData = 8;
+}
+message AndroidAppDeliveryData {
+  optional string downloadUrl = 3;
+  repeated HttpCookie downloadAuthCookie = 5;
+}
+message HttpCookie {
+  optional string name = 1;
+  optional string value = 2;
 }

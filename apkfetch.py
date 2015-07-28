@@ -20,18 +20,6 @@ CHECKIN_USER_AGENT = 'Android-Checkin/2.0 (gio KOT49H)'
 DOWNLOAD_USER_AGENT = 'AndroidDownloadManager/4.4.4 (Linux; U; Android 4.4.4; XT1032 Build/KXB21.14-L1.40)'
 
 
-def get_var_int(buffer, position):
-    b = ord(buffer[position])
-    i = b & 0x7F
-    shift = 7
-    while (b & 0x80) != 0:
-        position += 1
-        b = ord(buffer[position])
-        i |= (b & 0x7F) << shift
-        shift += 7
-    return i
-
-
 def num_to_hex(num):
     hex_str = format(num, 'x')
     length = len(hex_str)
@@ -142,7 +130,6 @@ class APKfetch(object):
 
         if not androidid:
             _, self.androidid = self.checkin()
-            print self.androidid
             
         _, self.auth = self.request_service('androidmarket', 'com.android.vending', MARKET_USER_AGENT)
             
@@ -171,37 +158,25 @@ class APKfetch(object):
         response = self.session.post(GOOGLE_PURCHASE_URL, data=data, headers=headers, allow_redirects=True)
 
         # Extract URLs from response
-        # TODO: use protobuf
-        urls = []
-        index = 0
-        content = response.content
-        while content.find('http', index) >= 0:
-            index = content.find('http', index)
-            length = get_var_int(content, index - 2)
-            urls.append(content[index:index + length])
-            index += 1
+        buy_response = apkfetch_pb2.ResponseWrapper()
+        buy_response.ParseFromString(response.content)
+        url = buy_response.payload.buyResponse.purchaseStatusResponse.appDeliveryData.downloadUrl
+        
+        # Extract MarketDA value        
+        marketda = None
+        for c in buy_response.payload.buyResponse.purchaseStatusResponse.appDeliveryData.downloadAuthCookie:
+            if c.name == 'MarketDA':
+                marketda = c.value
 
-        # Extract MarketDA value
-        index = content.find('MarketDA')
-        length = get_var_int(content, index + 9)
-        marketda = content[index + 10:index + length + 10]
-
-        response = self.session.get(urls[-1], headers={'User-Agent': DOWNLOAD_USER_AGENT}, 
+        response = self.session.get(url, headers={'User-Agent': DOWNLOAD_USER_AGENT}, 
                                     cookies={'MarketDA': marketda}, allow_redirects=True)
-
-        if len(urls) > 1:
-            buffer = StringIO.StringIO(response.content)
-            gzip_file = gzip.GzipFile(mode="rb", fileobj=buffer)
-            uncompressed = gzip_file.read()
-        else:
-            uncompressed = response.content
 
         apk_fn = apk_fn or (package_name + '.apk')
         if os.path.exists(apk_fn):
             os.remove(apk_fn)
 
         with open(apk_fn, 'wb') as fp:
-            fp.write(uncompressed)
+            fp.write(response.content)
 
         return os.path.exists(apk_fn)
 
@@ -228,6 +203,10 @@ def main(argv):
 
         apk = APKfetch()
         apk.login(user, passwd, androidid)
+        
+        if not androidid and apk.androidid:
+            print 'AndroidID', apk.androidid
+        
         apk.fetch(package)
 
     except Exception, e:
