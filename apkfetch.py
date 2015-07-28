@@ -11,7 +11,7 @@ import apkfetch_pb2
 
 GOOGLE_LOGIN_URL = 'https://android.clients.google.com/auth'
 GOOGLE_CHECKIN_URL = 'https://android.clients.google.com/checkin'
-GOOGLE_DETAILS_URL = 'https://play.google.com/store/apps/details?id='
+GOOGLE_DETAILS_URL = 'https://android.clients.google.com/fdfe/details'
 GOOGLE_PURCHASE_URL = 'https://android.clients.google.com/fdfe/purchase'
 
 LOGIN_USER_AGENT = 'GoogleLoginService/1.3 (gio KOT49H)'
@@ -136,13 +136,19 @@ class APKfetch(object):
         return self.auth is not None
 
     def version(self, package_name):
-        # TODO: use /fdfe/details
-        response = self.session.get(GOOGLE_DETAILS_URL + package_name, allow_redirects=True)
-        search_str = r'</button> </li><li role="menuitem" tabindex="-1"> <button class="dropdown-child" data-dropdown-value="'
-        i1 = response.content.find(search_str)
-        i2 = response.content.find(search_str, i1 + 1) + len(search_str)
-        i3 = response.content.find('"', i2)
-        return response.content[i2:i3]
+        headers = {'X-DFE-Device-Id': self.androidid,
+                   'X-DFE-Client-Id': 'am-android-google',
+                   'Accept-Encoding': '',
+                   'Host': 'android.clients.google.com',
+                   'Authorization': 'GoogleLogin ' + self.auth}
+        
+        params = {'doc': package_name}
+        response = self.session.get(GOOGLE_DETAILS_URL, params=params, headers=headers, allow_redirects=True)
+        
+        details_response = apkfetch_pb2.ResponseWrapper()
+        details_response.ParseFromString(response.content)
+        version = details_response.payload.detailsResponse.docV2.details.appDetails.versionCode
+        return version
 
     def fetch(self, package_name, apk_fn=None):
         headers = {'X-DFE-Device-Id': self.androidid,

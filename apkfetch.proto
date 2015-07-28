@@ -38,6 +38,7 @@ message ResponseWrapper {
   optional Payload payload = 1;
 }
 message Payload {
+  optional DetailsResponse detailsResponse = 2;
   optional BuyResponse buyResponse = 4;
 }
 message BuyResponse {
@@ -53,4 +54,16 @@ message AndroidAppDeliveryData {
 message HttpCookie {
   optional string name = 1;
   optional string value = 2;
+}
+message DetailsResponse {
+  optional DocV2 docV2 = 4;
+}
+message DocV2 {
+  optional DocumentDetails details = 13;
+}
+message DocumentDetails {
+  optional AppDetails appDetails = 1;
+}
+message AppDetails {
+  optional int32 versionCode = 3;
 }
