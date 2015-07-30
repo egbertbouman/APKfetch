@@ -175,14 +175,17 @@ class APKfetch(object):
                 marketda = c.value
 
         response = self.session.get(url, headers={'User-Agent': DOWNLOAD_USER_AGENT}, 
-                                    cookies={'MarketDA': marketda}, allow_redirects=True)
+                                    cookies={'MarketDA': marketda}, stream=True, allow_redirects=True)
 
         apk_fn = apk_fn or (package_name + '.apk')
         if os.path.exists(apk_fn):
             os.remove(apk_fn)
 
         with open(apk_fn, 'wb') as fp:
-            fp.write(response.content)
+            for chunk in response.iter_content(chunk_size=5*1024): 
+                if chunk:
+                    fp.write(chunk)
+                    fp.flush()
 
         return os.path.exists(apk_fn)
 
