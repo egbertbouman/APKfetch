@@ -196,6 +196,7 @@ def main(argv):
     parser.add_argument('--user', '-u', help='Google username')
     parser.add_argument('--passwd', '-p', help='Google password')
     parser.add_argument('--androidid', '-a', help='AndroidID')
+    parser.add_argument('--version', '-v', action='store_true', help='Only get the current version-code of the app')
     parser.add_argument('--package', '-k', help='Package name of the app')
 
     try:
@@ -205,6 +206,7 @@ def main(argv):
         passwd = args.passwd
         androidid = args.androidid
         package = args.package
+        version = args.version
 
         if not user or not passwd or not package:
             parser.print_usage()
@@ -216,7 +218,11 @@ def main(argv):
         if not androidid and apk.androidid:
             print 'AndroidID', apk.androidid
         
-        apk.fetch(package)
+        if version:
+            version_code = apk.version(package)
+            print 'Version-code of %s is %d' % (package, version_code)
+        else:
+            apk.fetch(package)
 
     except Exception, e:
         print 'Error:', str(e)
