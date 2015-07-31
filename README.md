@@ -13,7 +13,7 @@ The requests/protobuf packages can be installed with
     pip install protobuf
 
 
-### Example
+### Using the library
 
 Using the library is as simple as:
 
@@ -29,8 +29,28 @@ if __name__ == '__main__':
     main()
 ```
 
- Note that the example creates a new android id. If you wish to use an existing id, you should login using:
- 
- ```python
- apk.login('you@gmail.com', 'yourpassword', 'yourandroidid')
- ```
+Note that the example creates a new android id. If you wish to use an existing id, you should login using:
+
+```python
+apk.login('you@gmail.com', 'yourpassword', 'yourandroidid')
+```
+
+### Using the CLI
+
+```
+usage: apkfetch.py [--help] [--user USER] [--passwd PASSWD]
+                   [--androidid ANDROIDID] [--version] [--package PACKAGE]
+
+Fetch APK files from the Google Play store
+
+optional arguments:
+  --help, -h            Show this help message and exit
+  --user USER, -u USER  Google username
+  --passwd PASSWD, -p PASSWD
+                        Google password
+  --androidid ANDROIDID, -a ANDROIDID
+                        AndroidID
+  --version, -v         Only get the current version-code of the app
+  --package PACKAGE, -k PACKAGE
+                        Package name of the app
+``` 
