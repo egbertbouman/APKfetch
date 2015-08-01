@@ -148,6 +148,8 @@ class APKfetch(object):
         details_response = apkfetch_pb2.ResponseWrapper()
         details_response.ParseFromString(response.content)
         version = details_response.payload.detailsResponse.docV2.details.appDetails.versionCode
+        if not version:
+            raise RuntimeError('Could not get version-code')
         return version
 
     def fetch(self, package_name, apk_fn=None):
@@ -170,7 +172,7 @@ class APKfetch(object):
         
         error = buy_response.commands.displayErrorMessage
         if error or not url:
-            raise Exception(error or 'Could not get download URL')
+            raise RuntimeError(error or 'Could not get download URL')
         
         # Extract MarketDA value        
         marketda = None
@@ -228,7 +230,7 @@ def main(argv):
         else:
             apk.fetch(package)
 
-    except Exception, e:
+    except Exception as e:
         print 'Error:', str(e)
         sys.exit(1)
 
