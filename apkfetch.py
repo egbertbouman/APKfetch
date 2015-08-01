@@ -163,10 +163,14 @@ class APKfetch(object):
                 'tok': 'dummy-token'}
         response = self.session.post(GOOGLE_PURCHASE_URL, data=data, headers=headers, allow_redirects=True)
 
-        # Extract URLs from response
+        # Extract URL from response
         buy_response = apkfetch_pb2.ResponseWrapper()
         buy_response.ParseFromString(response.content)
         url = buy_response.payload.buyResponse.purchaseStatusResponse.appDeliveryData.downloadUrl
+        
+        error = buy_response.commands.displayErrorMessage
+        if error or not url:
+            raise Exception(error or 'Could not get download URL')
         
         # Extract MarketDA value        
         marketda = None

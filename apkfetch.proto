@@ -36,6 +36,10 @@ message AndroidCheckinResponse {
 }
 message ResponseWrapper {
   optional Payload payload = 1;
+  optional ServerCommands commands = 2;
+}
+message ServerCommands {
+  optional string displayErrorMessage = 2;
 }
 message Payload {
   optional DetailsResponse detailsResponse = 2;
