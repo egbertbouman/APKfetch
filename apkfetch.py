@@ -9,10 +9,13 @@ import StringIO
 
 import apkfetch_pb2
 
+from util import encrypt
+
 GOOGLE_LOGIN_URL = 'https://android.clients.google.com/auth'
 GOOGLE_CHECKIN_URL = 'https://android.clients.google.com/checkin'
 GOOGLE_DETAILS_URL = 'https://android.clients.google.com/fdfe/details'
 GOOGLE_PURCHASE_URL = 'https://android.clients.google.com/fdfe/purchase'
+GOOGLE_DELIVERY_URL = 'https://android.clients.google.com/fdfe/delivery'
 
 LOGIN_USER_AGENT = 'GoogleLoginService/1.3 (gio KOT49H)'
 MARKET_USER_AGENT = 'Android-Finsky/5.7.10 (api=3,versionCode=80371000,sdk=19,device=falcon_umts,hardware=qcom,product=falcon_reteu,platformVersionRelease=4.4.4,model=XT1032,buildId=KXB21.14-L1.40,isWideScreen=0)'
@@ -51,10 +54,7 @@ class APKfetch(object):
         if self.androidid:
             data['androidId'] = self.androidid
             
-        if self.token:
-            data['EncryptedPasswd'] = self.token
-        else:
-            data['Passwd'] = self.passwd
+        data['EncryptedPasswd'] = self.token if self.token else encrypt(self.user, self.passwd)
 
         response = self.session.post(GOOGLE_LOGIN_URL, data=data, allow_redirects=True)
         
@@ -161,19 +161,26 @@ class APKfetch(object):
 
         data = {'doc': package_name,
                 'ot': '1',
-                'vc': self.version(package_name),
-                'tok': 'dummy-token'}
+                'vc': self.version(package_name)}
         response = self.session.post(GOOGLE_PURCHASE_URL, data=data, headers=headers, allow_redirects=True)
 
         # Extract URL from response
         buy_response = apkfetch_pb2.ResponseWrapper()
         buy_response.ParseFromString(response.content)
         url = buy_response.payload.buyResponse.purchaseStatusResponse.appDeliveryData.downloadUrl
-        
         error = buy_response.commands.displayErrorMessage
-        if error or not url:
-            raise RuntimeError(error or 'Could not get download URL')
-        
+        if error:
+            raise RuntimeError(error)
+
+        if not url:
+            # TODO: find a better way to do this
+            response = self.session.get(GOOGLE_DELIVERY_URL, params=data, headers=headers, allow_redirects=True)
+            delivery_response = apkfetch_pb2.ResponseWrapper()
+            delivery_response.ParseFromString(response.content)
+            url = delivery_response.payload.deliveryResponse.appDeliveryData.downloadUrl
+            if not url:
+                raise RuntimeError('Could not get download URL')
+
         # Extract MarketDA value        
         marketda = None
         for c in buy_response.payload.buyResponse.purchaseStatusResponse.appDeliveryData.downloadAuthCookie:

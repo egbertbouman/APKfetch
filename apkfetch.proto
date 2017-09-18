@@ -44,6 +44,7 @@ message ServerCommands {
 message Payload {
   optional DetailsResponse detailsResponse = 2;
   optional BuyResponse buyResponse = 4;
+  optional DeliveryResponse deliveryResponse = 21;
 }
 message BuyResponse {
   optional PurchaseStatusResponse purchaseStatusResponse = 39;
@@ -70,4 +71,8 @@ message DocumentDetails {
 }
 message AppDetails {
   optional int32 versionCode = 3;
+}
+message DeliveryResponse {
+  optional int32 status = 1;
+  optional AndroidAppDeliveryData appDeliveryData = 2;
 }
