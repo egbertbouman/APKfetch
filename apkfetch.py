@@ -57,15 +57,18 @@ class APKfetch(object):
         data['EncryptedPasswd'] = self.token if self.token else encrypt(self.user, self.passwd)
 
         response = self.session.post(GOOGLE_LOGIN_URL, data=data, allow_redirects=True)
-        
-        token = None
-        auth = None
-        for line in response.text.splitlines():
-            if line.startswith('Token'):
-                token = line[6:]
-            if line.startswith('Auth'):
-                auth = line
-        return token, auth
+        response_values = dict([line.split('=', 1) for line in response.text.splitlines()])
+
+        if 'Error' in response_values:
+            error_msg = response_values.get('ErrorDetail', None) or response_values.get('Error')
+            if 'Url' in response_values:
+                error_msg += '\n\nTo resolve the issue, visit: ' + response_values['Url']
+                error_msg += '\n\nOr try: https://accounts.google.com/b/0/DisplayUnlockCaptcha'
+            raise RuntimeError(error_msg)
+        elif 'Auth' not in response_values:
+            raise RuntimeError('Could not login')
+
+        return response_values.get('Token', None), response_values.get('Auth')
         
     def checkin(self):
         headers = {'User-Agent': CHECKIN_USER_AGENT,
@@ -140,7 +143,7 @@ class APKfetch(object):
                    'X-DFE-Client-Id': 'am-android-google',
                    'Accept-Encoding': '',
                    'Host': 'android.clients.google.com',
-                   'Authorization': 'GoogleLogin ' + self.auth}
+                   'Authorization': 'GoogleLogin Auth=' + self.auth}
         
         params = {'doc': package_name}
         response = self.session.get(GOOGLE_DETAILS_URL, params=params, headers=headers, allow_redirects=True)
@@ -152,16 +155,16 @@ class APKfetch(object):
             raise RuntimeError('Could not get version-code')
         return version
 
-    def fetch(self, package_name, apk_fn=None):
+    def fetch(self, package_name, version_code, apk_fn=None):
         headers = {'X-DFE-Device-Id': self.androidid,
                    'X-DFE-Client-Id': 'am-android-google',
                    'Accept-Encoding': '',
                    'Host': 'android.clients.google.com',
-                   'Authorization': 'GoogleLogin ' + self.auth}
+                   'Authorization': 'GoogleLogin Auth=' + self.auth}
 
         data = {'doc': package_name,
                 'ot': '1',
-                'vc': self.version(package_name)}
+                'vc': version_code}
         response = self.session.post(GOOGLE_PURCHASE_URL, data=data, headers=headers, allow_redirects=True)
 
         # Extract URL from response
@@ -209,7 +212,7 @@ def main(argv):
     parser.add_argument('--user', '-u', help='Google username')
     parser.add_argument('--passwd', '-p', help='Google password')
     parser.add_argument('--androidid', '-a', help='AndroidID')
-    parser.add_argument('--version', '-v', action='store_true', help='Only get the current version-code of the app')
+    parser.add_argument('--version', '-v', help='Download a specific version of the app')
     parser.add_argument('--package', '-k', help='Package name of the app')
 
     try:
@@ -227,15 +230,13 @@ def main(argv):
 
         apk = APKfetch()
         apk.login(user, passwd, androidid)
-        
+
         if not androidid and apk.androidid:
             print 'AndroidID', apk.androidid
-        
-        if version:
-            version_code = apk.version(package)
-            print 'Version-code of %s is %d' % (package, version_code)
-        else:
-            apk.fetch(package)
+
+        version = version or apk.version(package)
+        if apk.fetch(package, version):
+            print 'Downloaded version', version
 
     except Exception as e:
         print 'Error:', str(e)

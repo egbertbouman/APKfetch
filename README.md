@@ -39,7 +39,8 @@ apk.login('you@gmail.com', 'yourpassword', 'yourandroidid')
 
 ```
 usage: apkfetch.py [--help] [--user USER] [--passwd PASSWD]
-                   [--androidid ANDROIDID] [--version] [--package PACKAGE]
+                   [--androidid ANDROIDID] [--version VERSION]
+                   [--package PACKAGE]
 
 Fetch APK files from the Google Play store
 
@@ -50,7 +51,8 @@ optional arguments:
                         Google password
   --androidid ANDROIDID, -a ANDROIDID
                         AndroidID
-  --version, -v         Only get the current version-code of the app
+  --version VERSION, -v VERSION
+                        Download a specific version of the app
   --package PACKAGE, -k PACKAGE
                         Package name of the app
 ``` 
