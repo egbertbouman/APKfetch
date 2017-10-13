@@ -14,7 +14,6 @@ from util import encrypt
 GOOGLE_LOGIN_URL = 'https://android.clients.google.com/auth'
 GOOGLE_CHECKIN_URL = 'https://android.clients.google.com/checkin'
 GOOGLE_DETAILS_URL = 'https://android.clients.google.com/fdfe/details'
-GOOGLE_PURCHASE_URL = 'https://android.clients.google.com/fdfe/purchase'
 GOOGLE_DELIVERY_URL = 'https://android.clients.google.com/fdfe/delivery'
 
 LOGIN_USER_AGENT = 'GoogleLoginService/1.3 (gio KOT49H)'
@@ -54,7 +53,7 @@ class APKfetch(object):
         if self.androidid:
             data['androidId'] = self.androidid
             
-        data['EncryptedPasswd'] = self.token if self.token else encrypt(self.user, self.passwd)
+        data['EncryptedPasswd'] = self.token or encrypt(self.user, self.passwd)
 
         response = self.session.post(GOOGLE_LOGIN_URL, data=data, allow_redirects=True)
         response_values = dict([line.split('=', 1) for line in response.text.splitlines()])
@@ -155,7 +154,7 @@ class APKfetch(object):
             raise RuntimeError('Could not get version-code')
         return version
 
-    def fetch(self, package_name, version_code, apk_fn=None):
+    def get_download_url(self, package_name, version_code):
         headers = {'X-DFE-Device-Id': self.androidid,
                    'X-DFE-Client-Id': 'am-android-google',
                    'Accept-Encoding': '',
@@ -165,33 +164,27 @@ class APKfetch(object):
         data = {'doc': package_name,
                 'ot': '1',
                 'vc': version_code}
-        response = self.session.post(GOOGLE_PURCHASE_URL, data=data, headers=headers, allow_redirects=True)
 
-        # Extract URL from response
-        buy_response = apkfetch_pb2.ResponseWrapper()
-        buy_response.ParseFromString(response.content)
-        url = buy_response.payload.buyResponse.purchaseStatusResponse.appDeliveryData.downloadUrl
-        error = buy_response.commands.displayErrorMessage
-        if error:
-            raise RuntimeError(error)
+        response = self.session.get(GOOGLE_DELIVERY_URL, params=data, headers=headers, allow_redirects=True)
+        delivery_response = apkfetch_pb2.ResponseWrapper()
+        delivery_response.ParseFromString(response.content)
+        url = delivery_response.payload.deliveryResponse.appDeliveryData.downloadUrl
+        return url
 
+    def list(self, package_name):
+        vc_new = self.version(package_name)
+        for vc in xrange(vc_new, -1, -1):
+            url = self.get_download_url(package_name, vc)
+            if url:
+                yield vc
+
+    def fetch(self, package_name, version_code, apk_fn=None):
+        url = self.get_download_url(package_name, version_code)
         if not url:
-            # TODO: find a better way to do this
-            response = self.session.get(GOOGLE_DELIVERY_URL, params=data, headers=headers, allow_redirects=True)
-            delivery_response = apkfetch_pb2.ResponseWrapper()
-            delivery_response.ParseFromString(response.content)
-            url = delivery_response.payload.deliveryResponse.appDeliveryData.downloadUrl
-            if not url:
-                raise RuntimeError('Could not get download URL')
-
-        # Extract MarketDA value        
-        marketda = None
-        for c in buy_response.payload.buyResponse.purchaseStatusResponse.appDeliveryData.downloadAuthCookie:
-            if c.name == 'MarketDA':
-                marketda = c.value
+            raise RuntimeError('Could not get download URL')
 
         response = self.session.get(url, headers={'User-Agent': DOWNLOAD_USER_AGENT}, 
-                                    cookies={'MarketDA': marketda}, stream=True, allow_redirects=True)
+                                    stream=True, allow_redirects=True)
 
         apk_fn = apk_fn or (package_name + '.apk')
         if os.path.exists(apk_fn):
@@ -212,8 +205,9 @@ def main(argv):
     parser.add_argument('--user', '-u', help='Google username')
     parser.add_argument('--passwd', '-p', help='Google password')
     parser.add_argument('--androidid', '-a', help='AndroidID')
-    parser.add_argument('--version', '-v', help='Download a specific version of the app')
     parser.add_argument('--package', '-k', help='Package name of the app')
+    parser.add_argument('--version', '-v', help='Download a specific version of the app')
+    parser.add_argument('--search', '-s', help='Find all versions of the app that are available', action='store_true')
 
     try:
         args = parser.parse_args(sys.argv[1:])
@@ -234,9 +228,17 @@ def main(argv):
         if not androidid and apk.androidid:
             print 'AndroidID', apk.androidid
 
-        version = version or apk.version(package)
-        if apk.fetch(package, version):
-            print 'Downloaded version', version
+        if args.search:
+            print 'The following versions are available:',
+            for vc in apk.list(package):
+                print ' %d' % vc,
+                # We don't want to get blocked..
+                time.sleep(1)
+            print ''
+        else:
+            version = version or apk.version(package)
+            if apk.fetch(package, version):
+                print 'Downloaded version', version
 
     except Exception as e:
         print 'Error:', str(e)
