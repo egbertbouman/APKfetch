@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='apkfetch.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x0e\x61pkfetch.proto\"\xd3\x01\n\x15\x41ndroidCheckinRequest\x12\n\n\x02id\x18\x02 \x01(\x03\x12%\n\x07\x63heckin\x18\x04 \x01(\x0b\x32\x14.AndroidCheckinProto\x12\x15\n\rmarketCheckin\x18\x08 \x01(\t\x12\x15\n\raccountCookie\x18\x0b \x03(\t\x12\x0f\n\x07version\x18\x0e \x01(\x05\x12\x36\n\x13\x64\x65viceConfiguration\x18\x12 \x01(\x0b\x32\x19.DeviceConfigurationProto\x12\x10\n\x08\x66ragment\x18\x14 \x01(\x05\"8\n\x13\x41ndroidCheckinProto\x12!\n\x05\x62uild\x18\x01 \x01(\x0b\x32\x12.AndroidBuildProto\":\n\x11\x41ndroidBuildProto\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\x12\x12\n\nsdkVersion\x18\n \x01(\x05\"\xb6\x02\n\x18\x44\x65viceConfigurationProto\x12\x13\n\x0btouchScreen\x18\x01 \x01(\x05\x12\x10\n\x08keyboard\x18\x02 \x01(\x05\x12\x12\n\nnavigation\x18\x03 \x01(\x05\x12\x14\n\x0cscreenLayout\x18\x04 \x01(\x05\x12\x17\n\x0fhasHardKeyboard\x18\x05 \x01(\x08\x12\x1c\n\x14hasFiveWayNavigation\x18\x06 \x01(\x08\x12\x15\n\rscreenDensity\x18\x07 \x01(\x05\x12\x13\n\x0bglEsVersion\x18\x08 \x01(\x05\x12\x1b\n\x13systemSharedLibrary\x18\t \x03(\t\x12\x1e\n\x16systemAvailableFeature\x18\n \x03(\t\x12\x13\n\x0bscreenWidth\x18\x0c \x01(\x05\x12\x14\n\x0cscreenHeight\x18\r \x01(\x05\"B\n\x16\x41ndroidCheckinResponse\x12\x11\n\tandroidId\x18\x07 \x01(\x06\x12\x15\n\rsecurityToken\x18\x08 \x01(\x06\"O\n\x0fResponseWrapper\x12\x19\n\x07payload\x18\x01 \x01(\x0b\x32\x08.Payload\x12!\n\x08\x63ommands\x18\x02 \x01(\x0b\x32\x0f.ServerCommands\"-\n\x0eServerCommands\x12\x1b\n\x13\x64isplayErrorMessage\x18\x02 \x01(\t\"\x84\x01\n\x07Payload\x12)\n\x0f\x64\x65tailsResponse\x18\x02 \x01(\x0b\x32\x10.DetailsResponse\x12!\n\x0b\x62uyResponse\x18\x04 \x01(\x0b\x32\x0c.BuyResponse\x12+\n\x10\x64\x65liveryResponse\x18\x15 \x01(\x0b\x32\x11.DeliveryResponse\"F\n\x0b\x42uyResponse\x12\x37\n\x16purchaseStatusResponse\x18\' \x01(\x0b\x32\x17.PurchaseStatusResponse\"J\n\x16PurchaseStatusResponse\x12\x30\n\x0f\x61ppDeliveryData\x18\x08 \x01(\x0b\x32\x17.AndroidAppDeliveryData\"V\n\x16\x41ndroidAppDeliveryData\x12\x13\n\x0b\x64ownloadUrl\x18\x03 \x01(\t\x12\'\n\x12\x64ownloadAuthCookie\x18\x05 \x03(\x0b\x32\x0b.HttpCookie\")\n\nHttpCookie\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"(\n\x0f\x44\x65tailsResponse\x12\x15\n\x05\x64ocV2\x18\x04 \x01(\x0b\x32\x06.DocV2\"*\n\x05\x44ocV2\x12!\n\x07\x64\x65tails\x18\r \x01(\x0b\x32\x10.DocumentDetails\"2\n\x0f\x44ocumentDetails\x12\x1f\n\nappDetails\x18\x01 \x01(\x0b\x32\x0b.AppDetails\"!\n\nAppDetails\x12\x13\n\x0bversionCode\x18\x03 \x01(\x05\"T\n\x10\x44\x65liveryResponse\x12\x0e\n\x06status\x18\x01 \x01(\x05\x12\x30\n\x0f\x61ppDeliveryData\x18\x02 \x01(\x0b\x32\x17.AndroidAppDeliveryData')
+  serialized_pb=_b('\n\x0e\x61pkfetch.proto\"\xd3\x01\n\x15\x41ndroidCheckinRequest\x12\n\n\x02id\x18\x02 \x01(\x03\x12%\n\x07\x63heckin\x18\x04 \x01(\x0b\x32\x14.AndroidCheckinProto\x12\x15\n\rmarketCheckin\x18\x08 \x01(\t\x12\x15\n\raccountCookie\x18\x0b \x03(\t\x12\x0f\n\x07version\x18\x0e \x01(\x05\x12\x36\n\x13\x64\x65viceConfiguration\x18\x12 \x01(\x0b\x32\x19.DeviceConfigurationProto\x12\x10\n\x08\x66ragment\x18\x14 \x01(\x05\"8\n\x13\x41ndroidCheckinProto\x12!\n\x05\x62uild\x18\x01 \x01(\x0b\x32\x12.AndroidBuildProto\":\n\x11\x41ndroidBuildProto\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\x12\x12\n\nsdkVersion\x18\n \x01(\x05\"\xce\x02\n\x18\x44\x65viceConfigurationProto\x12\x13\n\x0btouchScreen\x18\x01 \x01(\x05\x12\x10\n\x08keyboard\x18\x02 \x01(\x05\x12\x12\n\nnavigation\x18\x03 \x01(\x05\x12\x14\n\x0cscreenLayout\x18\x04 \x01(\x05\x12\x17\n\x0fhasHardKeyboard\x18\x05 \x01(\x08\x12\x1c\n\x14hasFiveWayNavigation\x18\x06 \x01(\x08\x12\x15\n\rscreenDensity\x18\x07 \x01(\x05\x12\x13\n\x0bglEsVersion\x18\x08 \x01(\x05\x12\x1b\n\x13systemSharedLibrary\x18\t \x03(\t\x12\x1e\n\x16systemAvailableFeature\x18\n \x03(\t\x12\x16\n\x0enativePlatform\x18\x0b \x03(\t\x12\x13\n\x0bscreenWidth\x18\x0c \x01(\x05\x12\x14\n\x0cscreenHeight\x18\r \x01(\x05\"B\n\x16\x41ndroidCheckinResponse\x12\x11\n\tandroidId\x18\x07 \x01(\x06\x12\x15\n\rsecurityToken\x18\x08 \x01(\x06\"O\n\x0fResponseWrapper\x12\x19\n\x07payload\x18\x01 \x01(\x0b\x32\x08.Payload\x12!\n\x08\x63ommands\x18\x02 \x01(\x0b\x32\x0f.ServerCommands\"-\n\x0eServerCommands\x12\x1b\n\x13\x64isplayErrorMessage\x18\x02 \x01(\t\"\x84\x01\n\x07Payload\x12)\n\x0f\x64\x65tailsResponse\x18\x02 \x01(\x0b\x32\x10.DetailsResponse\x12!\n\x0b\x62uyResponse\x18\x04 \x01(\x0b\x32\x0c.BuyResponse\x12+\n\x10\x64\x65liveryResponse\x18\x15 \x01(\x0b\x32\x11.DeliveryResponse\"F\n\x0b\x42uyResponse\x12\x37\n\x16purchaseStatusResponse\x18\' \x01(\x0b\x32\x17.PurchaseStatusResponse\"J\n\x16PurchaseStatusResponse\x12\x30\n\x0f\x61ppDeliveryData\x18\x08 \x01(\x0b\x32\x17.AndroidAppDeliveryData\"V\n\x16\x41ndroidAppDeliveryData\x12\x13\n\x0b\x64ownloadUrl\x18\x03 \x01(\t\x12\'\n\x12\x64ownloadAuthCookie\x18\x05 \x03(\x0b\x32\x0b.HttpCookie\")\n\nHttpCookie\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"(\n\x0f\x44\x65tailsResponse\x12\x15\n\x05\x64ocV2\x18\x04 \x01(\x0b\x32\x06.DocV2\"*\n\x05\x44ocV2\x12!\n\x07\x64\x65tails\x18\r \x01(\x0b\x32\x10.DocumentDetails\"2\n\x0f\x44ocumentDetails\x12\x1f\n\nappDetails\x18\x01 \x01(\x0b\x32\x0b.AppDetails\"!\n\nAppDetails\x12\x13\n\x0bversionCode\x18\x03 \x01(\x05\"T\n\x10\x44\x65liveryResponse\x12\x0e\n\x06status\x18\x01 \x01(\x05\x12\x30\n\x0f\x61ppDeliveryData\x18\x02 \x01(\x0b\x32\x17.AndroidAppDeliveryData')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -246,14 +246,21 @@ _DEVICECONFIGURATIONPROTO = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='screenWidth', full_name='DeviceConfigurationProto.screenWidth', index=10,
+      name='nativePlatform', full_name='DeviceConfigurationProto.nativePlatform', index=10,
+      number=11, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='screenWidth', full_name='DeviceConfigurationProto.screenWidth', index=11,
       number=12, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='screenHeight', full_name='DeviceConfigurationProto.screenHeight', index=11,
+      name='screenHeight', full_name='DeviceConfigurationProto.screenHeight', index=12,
       number=13, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -272,7 +279,7 @@ _DEVICECONFIGURATIONPROTO = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=351,
-  serialized_end=661,
+  serialized_end=685,
 )
 
 
@@ -309,8 +316,8 @@ _ANDROIDCHECKINRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=663,
-  serialized_end=729,
+  serialized_start=687,
+  serialized_end=753,
 )
 
 
@@ -347,8 +354,8 @@ _RESPONSEWRAPPER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=731,
-  serialized_end=810,
+  serialized_start=755,
+  serialized_end=834,
 )
 
 
@@ -378,8 +385,8 @@ _SERVERCOMMANDS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=812,
-  serialized_end=857,
+  serialized_start=836,
+  serialized_end=881,
 )
 
 
@@ -423,8 +430,8 @@ _PAYLOAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=860,
-  serialized_end=992,
+  serialized_start=884,
+  serialized_end=1016,
 )
 
 
@@ -454,8 +461,8 @@ _BUYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=994,
-  serialized_end=1064,
+  serialized_start=1018,
+  serialized_end=1088,
 )
 
 
@@ -485,8 +492,8 @@ _PURCHASESTATUSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1066,
-  serialized_end=1140,
+  serialized_start=1090,
+  serialized_end=1164,
 )
 
 
@@ -523,8 +530,8 @@ _ANDROIDAPPDELIVERYDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1142,
-  serialized_end=1228,
+  serialized_start=1166,
+  serialized_end=1252,
 )
 
 
@@ -561,8 +568,8 @@ _HTTPCOOKIE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1230,
-  serialized_end=1271,
+  serialized_start=1254,
+  serialized_end=1295,
 )
 
 
@@ -592,8 +599,8 @@ _DETAILSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1273,
-  serialized_end=1313,
+  serialized_start=1297,
+  serialized_end=1337,
 )
 
 
@@ -623,8 +630,8 @@ _DOCV2 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1315,
-  serialized_end=1357,
+  serialized_start=1339,
+  serialized_end=1381,
 )
 
 
@@ -654,8 +661,8 @@ _DOCUMENTDETAILS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1359,
-  serialized_end=1409,
+  serialized_start=1383,
+  serialized_end=1433,
 )
 
 
@@ -685,8 +692,8 @@ _APPDETAILS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1411,
-  serialized_end=1444,
+  serialized_start=1435,
+  serialized_end=1468,
 )
 
 
@@ -723,8 +730,8 @@ _DELIVERYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1446,
-  serialized_end=1530,
+  serialized_start=1470,
+  serialized_end=1554,
 )
 
 _ANDROIDCHECKINREQUEST.fields_by_name['checkin'].message_type = _ANDROIDCHECKINPROTO

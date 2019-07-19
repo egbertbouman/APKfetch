@@ -17,7 +17,7 @@ GOOGLE_DETAILS_URL = 'https://android.clients.google.com/fdfe/details'
 GOOGLE_DELIVERY_URL = 'https://android.clients.google.com/fdfe/delivery'
 
 LOGIN_USER_AGENT = 'GoogleLoginService/1.3 (gio KOT49H)'
-MARKET_USER_AGENT = 'Android-Finsky/5.7.10 (api=3,versionCode=80371000,sdk=19,device=falcon_umts,hardware=qcom,product=falcon_reteu,platformVersionRelease=4.4.4,model=XT1032,buildId=KXB21.14-L1.40,isWideScreen=0)'
+MARKET_USER_AGENT = 'Android-Finsky/5.7.10 (api=3,versionCode=80371000,sdk=24,device=falcon_umts,hardware=qcom,product=falcon_reteu,platformVersionRelease=4.4.4,model=XT1032,buildId=KXB21.14-L1.40,isWideScreen=0)'
 CHECKIN_USER_AGENT = 'Android-Checkin/2.0 (gio KOT49H)'
 DOWNLOAD_USER_AGENT = 'AndroidDownloadManager/4.4.4 (Linux; U; Android 4.4.4; XT1032 Build/KXB21.14-L1.40)'
 
@@ -108,8 +108,9 @@ class APKfetch(object):
                                                               "android.hardware.usb.accessory", "android.hardware.usb.host", 
                                                               "android.hardware.wifi", "android.hardware.wifi.direct",
                                                               "android.software.live_wallpaper", "android.software.sip",
-                                                              "android.software.sip.voip", 
+                                                              "android.software.sip.voip",
                                                               "com.google.android.feature.GOOGLE_BUILD", "com.nxp.mifare"])
+        cr.deviceConfiguration.nativePlatform.extend(["armeabi-v7a", "armeabi"])
         cr.deviceConfiguration.screenWidth = 720
         cr.deviceConfiguration.screenHeight = 1280
         cr.version = 3
@@ -142,8 +143,9 @@ class APKfetch(object):
                    'X-DFE-Client-Id': 'am-android-google',
                    'Accept-Encoding': '',
                    'Host': 'android.clients.google.com',
-                   'Authorization': 'GoogleLogin Auth=' + self.auth}
-        
+                   'Authorization': 'GoogleLogin Auth=' + self.auth,
+                   'User-Agent': MARKET_USER_AGENT}
+
         params = {'doc': package_name}
         response = self.session.get(GOOGLE_DETAILS_URL, params=params, headers=headers, allow_redirects=True)
         

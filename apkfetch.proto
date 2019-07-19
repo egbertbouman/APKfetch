@@ -27,6 +27,7 @@ message DeviceConfigurationProto {
   optional int32 glEsVersion = 8;
   repeated string systemSharedLibrary = 9;
   repeated string systemAvailableFeature = 10;
+  repeated string nativePlatform = 11;
   optional int32 screenWidth = 12;
   optional int32 screenHeight = 13;
 }
