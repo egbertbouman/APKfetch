@@ -8,11 +8,9 @@ Library for downloading APK files from the Google Play store.
 * protobuf
 * PyCryptodome
 
-The requests/protobuf packages can be installed with
+The Python packages can be installed with
 
-    pip install requests
-    pip install protobuf
-    pip install pycryptodome
+    pip install -r requirements.txt
 
 
 ### Using the library
