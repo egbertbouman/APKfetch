@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import os
 import sys
 import json
@@ -5,7 +7,6 @@ import gzip
 import time
 import argparse
 import requests
-import StringIO
 
 import apkfetch_pb2
 
@@ -228,22 +229,22 @@ def main(argv):
         apk.login(user, passwd, androidid)
 
         if not androidid and apk.androidid:
-            print 'AndroidID', apk.androidid
+            print('AndroidID', apk.androidid)
 
         if args.search:
-            print 'The following versions are available:',
+            print('The following versions are available:', end = '')
             for vc in apk.list(package):
-                print ' %d' % vc,
+                print(' %d' % vc, end = '')
                 # We don't want to get blocked..
                 time.sleep(1)
-            print ''
+            print('')
         else:
             version = version or apk.version(package)
             if apk.fetch(package, version):
-                print 'Downloaded version', version
+                print('Downloaded version', version)
 
     except Exception as e:
-        print 'Error:', str(e)
+        print('Error:', str(e))
         sys.exit(1)
 
 
